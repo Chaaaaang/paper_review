@@ -19,4 +19,21 @@ Step 1. Geo-Clustering : Algorithm 최초 1회 때는 Step 1-1, 그 이후는 1-
     
 * Step 2. T-matrix Generation
   * 7개의 time slot을 만듭니다.
-    
+    * 평일 7:00am - 11:00am
+    * 평일 11:00am - 4:00pm
+    * 평일 4:00pm - 9:00pm
+    * 평일 9:00pm - 7:00am
+    * 주말 0:00am - 9:00am
+    * 주말 9:00am - 7:00pm
+    * 주말 7:00pm - 12:00pm
+  
+  * 7개의 time slot값을 이용하여 A라는 t-matrix를 만듭니다.
+    * Ai : 정류소 i의 matrix A
+    * (Ai)의 (l,j) : time slot l에 자전거 정류소 Si로부터 cluster C1,j로 check-in 될 확률. (C1은 Step 1의 Geo-Clustering으로 만든 클러스터를 지칭합니다)
+    -> 각 Check-in에 대한 조건부 확률은 maximum likelihood estimation으로 추정됩니다.(Check-in 기록을 데이터로 씀)
+
+* Step 3. T-Clustering
+  * t-matrices를 기준으로 K-means Clustering을 통해 K2개의 Cluster를 만듭니다. (단, K1 > K2)
+
+* Step 4 : T-clustering 데이터에 대해 1-2, 2, 3 작업을 반복합니다.
+  * 전의 결과값과 같거나 특정 횟수까지 이를 반복하게 됩니다.
